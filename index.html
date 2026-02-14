@@ -1,0 +1,1030 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Will You Be My Valentine? 🖤</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Cinzel:wght@400;600;700&family=Great+Vibes&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Crimson Text", serif;
+        background: linear-gradient(
+          135deg,
+          #0a0a0a 0%,
+          #1a0a0f 50%,
+          #0f0a1a 100%
+        );
+        color: #e8d5c4;
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .bg-effects {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+        overflow: hidden;
+      }
+
+      .floating-heart {
+        position: absolute;
+        font-size: 20px;
+        opacity: 0.15;
+        animation: float 15s infinite ease-in-out;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-80px) rotate(10deg);
+        }
+      }
+
+      .slides-container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        opacity: 0;
+        transform: translateX(100%);
+        transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+        z-index: 5;
+      }
+
+      .slide.active {
+        opacity: 1;
+        transform: translateX(0);
+        z-index: 10;
+      }
+
+      .slide.prev {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+
+      .slide-content {
+        max-width: 750px;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+      }
+
+      h1 {
+        font-family: "Cinzel", serif;
+        font-size: 3.2rem;
+        background: linear-gradient(45deg, #d4af37, #ff6b6b, #d4af37);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shimmer 3s linear infinite;
+        margin-bottom: 18px;
+        letter-spacing: 3px;
+      }
+
+      h2 {
+        font-family: "Cinzel", serif;
+        font-size: 2.2rem;
+        color: #d4af37;
+        margin-bottom: 18px;
+        text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+      }
+
+      @keyframes shimmer {
+        to {
+          background-position: 200% center;
+        }
+      }
+
+      p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        color: #e8d5c4;
+      }
+
+      .btn {
+        font-family: "Cinzel", serif;
+        font-size: 1.1rem;
+        padding: 14px 40px;
+        background: linear-gradient(135deg, #8b0000, #d4af37);
+        border: 2px solid #d4af37;
+        color: #fff;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        box-shadow: 0 5px 30px rgba(212, 175, 55, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        transform: translate(-50%, -50%);
+        transition:
+          width 0.6s,
+          height 0.6s;
+      }
+
+      .btn:hover::before {
+        width: 300px;
+        height: 300px;
+      }
+
+      .btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 50px rgba(212, 175, 55, 0.6);
+      }
+
+      .btn span {
+        position: relative;
+        z-index: 2;
+      }
+
+      .cats-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 25px;
+        margin: 18px 0;
+        height: 100px;
+      }
+
+      .cat-wrapper {
+        position: relative;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        animation: gentleBounce 3s infinite ease-in-out;
+      }
+
+      .cat-wrapper:hover {
+        transform: scale(1.2);
+      }
+
+      .cat-wrapper:nth-child(2) {
+        animation-delay: 0.5s;
+      }
+      .cat-wrapper:nth-child(3) {
+        animation-delay: 1s;
+      }
+
+      @keyframes gentleBounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+      }
+
+      .cat-svg {
+        width: 70px;
+        height: 70px;
+        filter: drop-shadow(0 5px 15px rgba(255, 179, 186, 0.6));
+      }
+
+      .hearts-float {
+        display: flex;
+        justify-content: center;
+        gap: 35px;
+        margin: 18px 0;
+      }
+
+      .heart-icon {
+        font-size: 2.2rem;
+        animation: floatHeart 3s infinite ease-in-out;
+        filter: drop-shadow(0 0 10px currentColor);
+      }
+
+      .heart-icon:nth-child(1) {
+        animation-delay: 0s;
+        color: #ff6b6b;
+      }
+      .heart-icon:nth-child(2) {
+        animation-delay: 0.5s;
+        color: #d4af37;
+      }
+      .heart-icon:nth-child(3) {
+        animation-delay: 1s;
+        color: #ffb3ba;
+      }
+
+      @keyframes floatHeart {
+        0%,
+        100% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-20px) scale(1.1);
+        }
+      }
+
+      .content-box {
+        background: rgba(20, 10, 15, 0.9);
+        border: 2px solid #8b0000;
+        border-radius: 20px;
+        padding: 25px;
+        margin: 15px 0;
+        box-shadow: 0 0 30px rgba(139, 0, 0, 0.4);
+      }
+
+      .divider {
+        font-size: 30px;
+        margin: 12px 0;
+        opacity: 0.6;
+      }
+
+      .final-question {
+        font-family: "Great Vibes", cursive;
+        font-size: 4rem;
+        background: linear-gradient(45deg, #ff6b6b, #d4af37, #ffb3ba);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation:
+          shimmer 2s linear infinite,
+          pulse 2s ease-in-out infinite;
+        margin: 20px 0;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      .response-buttons {
+        display: flex;
+        gap: 25px;
+        justify-content: center;
+        margin-top: 25px;
+      }
+
+      .btn-yes {
+        background: linear-gradient(135deg, #ff6b6b, #d4af37);
+        font-size: 1.3rem;
+        padding: 18px 55px;
+        animation: glow 2s ease-in-out infinite;
+      }
+
+      @keyframes glow {
+        0%,
+        100% {
+          box-shadow: 0 5px 30px rgba(212, 175, 55, 0.4);
+        }
+        50% {
+          box-shadow: 0 10px 60px rgba(255, 107, 107, 0.8);
+        }
+      }
+
+      .btn-no {
+        background: linear-gradient(135deg, #4a4a4a, #2a2a2a);
+        border-color: #666;
+        padding: 14px 35px;
+      }
+
+      .celebration {
+        animation: celebrate 1s ease-in-out;
+      }
+
+      @keyframes celebrate {
+        0% {
+          transform: scale(0) rotate(-180deg);
+        }
+        50% {
+          transform: scale(1.1) rotate(10deg);
+        }
+        100% {
+          transform: scale(1) rotate(0deg);
+        }
+      }
+
+      .confetti {
+        position: absolute;
+        font-size: 2rem;
+        animation: fall 5s linear infinite;
+      }
+
+      @keyframes fall {
+        0% {
+          top: -10%;
+          transform: rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          top: 110%;
+          transform: rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      .music-control {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        background: rgba(212, 175, 55, 0.2);
+        border: 2px solid #d4af37;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1.5rem;
+      }
+
+      .music-control:hover {
+        background: rgba(212, 175, 55, 0.4);
+        transform: scale(1.1);
+      }
+
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2rem;
+        }
+        h2 {
+          font-size: 1.6rem;
+        }
+        p {
+          font-size: 1rem;
+        }
+        .btn {
+          font-size: 0.95rem;
+          padding: 12px 28px;
+        }
+        .final-question {
+          font-size: 2.8rem;
+        }
+        .cat-svg {
+          width: 55px;
+          height: 55px;
+        }
+        .cats-container {
+          height: 80px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <audio id="bgMusic" loop>
+      <source src="Robin-Thicke-Lost-Without-U-Offi.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div class="music-control" onclick="toggleMusic()" id="musicBtn">🎵</div>
+
+    <div class="bg-effects">
+      <div
+        class="floating-heart"
+        style="left: 10%; top: 20%; animation-delay: 0s"
+      >
+        🖤
+      </div>
+      <div
+        class="floating-heart"
+        style="left: 80%; top: 30%; animation-delay: 2s"
+      >
+        💀
+      </div>
+      <div
+        class="floating-heart"
+        style="left: 20%; top: 70%; animation-delay: 4s"
+      >
+        ✨
+      </div>
+      <div
+        class="floating-heart"
+        style="left: 90%; top: 60%; animation-delay: 6s"
+      >
+        🖤
+      </div>
+      <div
+        class="floating-heart"
+        style="left: 50%; top: 15%; animation-delay: 3s"
+      >
+        💫
+      </div>
+      <div
+        class="floating-heart"
+        style="left: 70%; top: 80%; animation-delay: 5s"
+      >
+        🌙
+      </div>
+    </div>
+
+    <div class="slides-container">
+      <div class="slide active" data-slide="0">
+        <div class="slide-content">
+          <h1>For You</h1>
+          <div class="divider">🖤 ☠ 🖤</div>
+          <p>
+            You're a paradox—baking cookies while watching crime
+            documentaries,<br />gentle with cats but fearless with everything
+            else.
+          </p>
+          <div class="cats-container">
+            <div class="cat-wrapper">
+              <svg
+                class="cat-svg"
+                viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <ellipse cx="50" cy="55" rx="30" ry="25" fill="#FFB347" />
+                <polygon points="25,35 15,15 30,30" fill="#FFB347" />
+                <polygon points="75,35 85,15 70,30" fill="#FFB347" />
+                <ellipse cx="40" cy="50" rx="5" ry="8" fill="#2C1810" />
+                <ellipse cx="60" cy="50" rx="5" ry="8" fill="#2C1810" />
+                <ellipse cx="41" cy="50" rx="2" ry="4" fill="#FFF" />
+                <ellipse cx="61" cy="50" rx="2" ry="4" fill="#FFF" />
+                <line
+                  x1="50"
+                  y1="58"
+                  x2="50"
+                  y2="63"
+                  stroke="#2C1810"
+                  stroke-width="2"
+                />
+                <path
+                  d="M 50 63 Q 45 68 40 65"
+                  stroke="#2C1810"
+                  stroke-width="2"
+                  fill="none"
+                />
+                <path
+                  d="M 50 63 Q 55 68 60 65"
+                  stroke="#2C1810"
+                  stroke-width="2"
+                  fill="none"
+                />
+              </svg>
+            </div>
+            <div class="cat-wrapper">
+              <svg
+                class="cat-svg"
+                viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <ellipse cx="50" cy="55" rx="30" ry="25" fill="#E6E6FA" />
+                <polygon points="25,35 15,15 30,30" fill="#E6E6FA" />
+                <polygon points="75,35 85,15 70,30" fill="#E6E6FA" />
+                <ellipse cx="40" cy="50" rx="5" ry="8" fill="#2C1810" />
+                <ellipse cx="60" cy="50" rx="5" ry="8" fill="#2C1810" />
+                <ellipse cx="41" cy="50" rx="2" ry="4" fill="#FFF" />
+                <ellipse cx="61" cy="50" rx="2" ry="4" fill="#FFF" />
+                <ellipse
+                  cx="35"
+                  cy="56"
+                  rx="6"
+                  ry="4"
+                  fill="#FFB6C1"
+                  opacity="0.6"
+                />
+                <ellipse
+                  cx="65"
+                  cy="56"
+                  rx="6"
+                  ry="4"
+                  fill="#FFB6C1"
+                  opacity="0.6"
+                />
+              </svg>
+            </div>
+          </div>
+          <button class="btn" onclick="nextSlide()">
+            <span>Tell Me More →</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="slide" data-slide="1">
+        <div class="slide-content">
+          <h2>You're Not Like Anyone Else</h2>
+          <div class="content-box">
+            <p>
+              You read dark novels by candlelight. You solve mysteries others
+              can't handle.<br />
+              You're soft where it matters and sharp where it counts.
+            </p>
+          </div>
+          <div class="hearts-float">
+            <span class="heart-icon">🖤</span>
+            <span class="heart-icon">💀</span>
+            <span class="heart-icon">🖤</span>
+          </div>
+          <button class="btn" onclick="nextSlide()">
+            <span>Continue →</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="slide" data-slide="2">
+        <div class="slide-content">
+          <h2>Your Cats Know</h2>
+          <div class="cats-container">
+            <div class="cat-wrapper">
+              <svg
+                class="cat-svg"
+                viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <ellipse cx="50" cy="55" rx="30" ry="25" fill="#98D8C8" />
+                <polygon points="25,35 15,15 30,30" fill="#98D8C8" />
+                <polygon points="75,35 85,15 70,30" fill="#98D8C8" />
+                <path
+                  d="M 38 48 Q 40 52 42 48"
+                  stroke="#2C1810"
+                  stroke-width="2"
+                  fill="none"
+                />
+                <path
+                  d="M 58 48 Q 60 52 62 48"
+                  stroke="#2C1810"
+                  stroke-width="2"
+                  fill="none"
+                />
+                <path
+                  d="M 40 65 Q 50 72 60 65"
+                  stroke="#2C1810"
+                  stroke-width="2"
+                  fill="none"
+                />
+              </svg>
+            </div>
+            <div class="cat-wrapper">
+              <svg
+                class="cat-svg"
+                viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <ellipse cx="50" cy="55" rx="30" ry="25" fill="#FFE5B4" />
+                <polygon points="25,35 15,15 30,30" fill="#FFE5B4" />
+                <polygon points="75,35 85,15 70,30" fill="#FFE5B4" />
+                <ellipse cx="40" cy="50" rx="4" ry="7" fill="#2C1810" />
+                <ellipse cx="60" cy="50" rx="4" ry="7" fill="#2C1810" />
+                <path
+                  d="M 43 64 Q 50 68 57 64"
+                  stroke="#2C1810"
+                  stroke-width="2"
+                  fill="none"
+                />
+                <ellipse cx="50" cy="60" rx="3" ry="2" fill="#FFB6C1" />
+              </svg>
+            </div>
+            <div class="cat-wrapper">
+              <svg
+                class="cat-svg"
+                viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <ellipse cx="50" cy="55" rx="30" ry="25" fill="#DDA0DD" />
+                <polygon points="25,35 15,15 30,30" fill="#DDA0DD" />
+                <polygon points="75,35 85,15 70,30" fill="#DDA0DD" />
+                <ellipse cx="40" cy="50" rx="5" ry="8" fill="#2C1810" />
+                <ellipse cx="60" cy="50" rx="5" ry="8" fill="#2C1810" />
+                <circle cx="41" cy="49" r="2" fill="#FFF" />
+                <circle cx="61" cy="49" r="2" fill="#FFF" />
+              </svg>
+            </div>
+          </div>
+          <div class="content-box">
+            <p>
+              You're dangerous to hearts but defenseless to paws.<br />
+              That says everything about who you really are.
+            </p>
+          </div>
+          <button class="btn" onclick="nextSlide()">
+            <span>Keep Going →</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="slide" data-slide="3">
+        <div class="slide-content">
+          <h2>Why You're Extraordinary</h2>
+          <div class="content-box">
+            <p>
+              You have layers most people never develop.<br />
+              Intelligence that's beautiful and slightly terrifying.<br />
+              Interests that actually make you interesting.
+            </p>
+          </div>
+          <div class="hearts-float">
+            <span class="heart-icon">💫</span>
+            <span class="heart-icon">🖤</span>
+            <span class="heart-icon">✨</span>
+          </div>
+          <button class="btn" onclick="nextSlide()">
+            <span>Almost There →</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="slide" data-slide="4">
+        <div class="slide-content">
+          <h2>What I Want</h2>
+          <div class="content-box">
+            <p>
+              To watch horror movies with you and not flinch (okay, maybe a
+              little).<br />
+              To taste your baking experiments.<br />
+              To hear your theories about unsolved cases.<br />
+              To know all of you—the parts you show and the parts you hide.
+            </p>
+          </div>
+          <div class="hearts-float">
+            <span class="heart-icon">🖤</span>
+            <span class="heart-icon">💀</span>
+            <span class="heart-icon">🖤</span>
+          </div>
+          <button class="btn" onclick="nextSlide()">
+            <span>One More Thing →</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="slide" data-slide="5">
+        <div class="slide-content">
+          <div class="hearts-float">
+            <span class="heart-icon">💀</span>
+            <span class="heart-icon">🖤</span>
+            <span class="heart-icon">💀</span>
+          </div>
+          <h1 class="final-question">Will You Be My Valentine?</h1>
+          <div class="cats-container">
+            <div class="cat-wrapper">
+              <svg
+                class="cat-svg"
+                viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <ellipse cx="50" cy="55" rx="30" ry="25" fill="#FFB347" />
+                <polygon points="25,35 15,15 30,30" fill="#FFB347" />
+                <polygon points="75,35 85,15 70,30" fill="#FFB347" />
+                <path
+                  d="M 38 48 Q 40 45 42 48"
+                  stroke="#2C1810"
+                  stroke-width="2.5"
+                  fill="none"
+                />
+                <path
+                  d="M 58 48 Q 60 45 62 48"
+                  stroke="#2C1810"
+                  stroke-width="2.5"
+                  fill="none"
+                />
+                <path
+                  d="M 40 65 Q 50 72 60 65"
+                  stroke="#2C1810"
+                  stroke-width="2.5"
+                  fill="none"
+                />
+                <ellipse
+                  cx="35"
+                  cy="56"
+                  rx="6"
+                  ry="4"
+                  fill="#FF69B4"
+                  opacity="0.5"
+                />
+                <ellipse
+                  cx="65"
+                  cy="56"
+                  rx="6"
+                  ry="4"
+                  fill="#FF69B4"
+                  opacity="0.5"
+                />
+              </svg>
+            </div>
+            <div class="cat-wrapper">
+              <svg
+                class="cat-svg"
+                viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <ellipse cx="50" cy="55" rx="30" ry="25" fill="#E6E6FA" />
+                <polygon points="25,35 15,15 30,30" fill="#E6E6FA" />
+                <polygon points="75,35 85,15 70,30" fill="#E6E6FA" />
+                <path
+                  d="M 38 48 Q 40 45 42 48"
+                  stroke="#2C1810"
+                  stroke-width="2.5"
+                  fill="none"
+                />
+                <path
+                  d="M 58 48 Q 60 45 62 48"
+                  stroke="#2C1810"
+                  stroke-width="2.5"
+                  fill="none"
+                />
+                <path
+                  d="M 40 65 Q 50 72 60 65"
+                  stroke="#2C1810"
+                  stroke-width="2.5"
+                  fill="none"
+                />
+                <ellipse
+                  cx="35"
+                  cy="56"
+                  rx="6"
+                  ry="4"
+                  fill="#FF69B4"
+                  opacity="0.5"
+                />
+                <ellipse
+                  cx="65"
+                  cy="56"
+                  rx="6"
+                  ry="4"
+                  fill="#FF69B4"
+                  opacity="0.5"
+                />
+              </svg>
+            </div>
+          </div>
+          <p style="font-size: 1.1rem; margin-top: 15px">
+            (Your cats have already approved this decision)
+          </p>
+          <div class="response-buttons">
+            <button class="btn btn-yes" onclick="sayYes()">
+              <span>Yes! 🖤</span>
+            </button>
+            <button class="btn btn-no" onclick="tryAgain()">
+              <span>Maybe...</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide" data-slide="6">
+        <div class="slide-content celebration">
+          <div id="confetti-container"></div>
+          <h1 style="font-size: 3.5rem">You Said Yes! 🎉</h1>
+          <div class="cats-container">
+            <div class="cat-wrapper">
+              <svg
+                class="cat-svg"
+                viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <ellipse cx="50" cy="55" rx="30" ry="25" fill="#FFB347" />
+                <polygon points="25,35 15,15 30,30" fill="#FFB347" />
+                <polygon points="75,35 85,15 70,30" fill="#FFB347" />
+                <path
+                  d="M 38 48 Q 40 45 42 48"
+                  stroke="#2C1810"
+                  stroke-width="2.5"
+                  fill="none"
+                />
+                <path
+                  d="M 58 48 Q 60 45 62 48"
+                  stroke="#2C1810"
+                  stroke-width="2.5"
+                  fill="none"
+                />
+                <path
+                  d="M 40 65 Q 50 72 60 65"
+                  stroke="#2C1810"
+                  stroke-width="2.5"
+                  fill="none"
+                />
+              </svg>
+            </div>
+            <div class="cat-wrapper">
+              <svg
+                class="cat-svg"
+                viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <ellipse cx="50" cy="55" rx="30" ry="25" fill="#E6E6FA" />
+                <polygon points="25,35 15,15 30,30" fill="#E6E6FA" />
+                <polygon points="75,35 85,15 70,30" fill="#E6E6FA" />
+                <path
+                  d="M 38 48 Q 40 45 42 48"
+                  stroke="#2C1810"
+                  stroke-width="2.5"
+                  fill="none"
+                />
+                <path
+                  d="M 58 48 Q 60 45 62 48"
+                  stroke="#2C1810"
+                  stroke-width="2.5"
+                  fill="none"
+                />
+                <path
+                  d="M 40 65 Q 50 72 60 65"
+                  stroke="#2C1810"
+                  stroke-width="2.5"
+                  fill="none"
+                />
+              </svg>
+            </div>
+            <div class="cat-wrapper">
+              <svg
+                class="cat-svg"
+                viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <ellipse cx="50" cy="55" rx="30" ry="25" fill="#98D8C8" />
+                <polygon points="25,35 15,15 30,30" fill="#98D8C8" />
+                <polygon points="75,35 85,15 70,30" fill="#98D8C8" />
+                <path
+                  d="M 38 48 Q 40 45 42 48"
+                  stroke="#2C1810"
+                  stroke-width="2.5"
+                  fill="none"
+                />
+                <path
+                  d="M 58 48 Q 60 45 62 48"
+                  stroke="#2C1810"
+                  stroke-width="2.5"
+                  fill="none"
+                />
+                <path
+                  d="M 40 65 Q 50 72 60 65"
+                  stroke="#2C1810"
+                  stroke-width="2.5"
+                  fill="none"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="content-box">
+            <p style="font-size: 1.3rem">
+              You just made someone incredibly happy.<br />
+              (The cats are pleased too.)
+            </p>
+            <div class="hearts-float" style="margin-top: 25px">
+              <span class="heart-icon" style="font-size: 2.8rem">🖤</span>
+              <span class="heart-icon" style="font-size: 2.8rem">💀</span>
+              <span class="heart-icon" style="font-size: 2.8rem">🖤</span>
+            </div>
+          </div>
+          <p
+            style="
+              font-size: 1.6rem;
+              color: #d4af37;
+              margin-top: 25px;
+              font-family: &quot;Great Vibes&quot;, cursive;
+            "
+          >
+            Happy Valentine's Day, Beautiful 🖤
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let currentSlide = 0;
+      const slides = document.querySelectorAll(".slide");
+      const music = document.getElementById("bgMusic");
+      let musicPlaying = true;
+
+      document.addEventListener(
+        "click",
+        function initMusic() {
+          if (!musicPlaying) {
+            music
+              .play()
+              .then(() => {
+                musicPlaying = true;
+                document.getElementById("musicBtn").textContent = "🎵";
+              })
+              .catch(() => {});
+          }
+        },
+        { once: true },
+      );
+
+      function toggleMusic() {
+        if (musicPlaying) {
+          music.pause();
+          musicPlaying = false;
+          document.getElementById("musicBtn").textContent = "🔇";
+        } else {
+          music.play();
+          musicPlaying = true;
+          document.getElementById("musicBtn").textContent = "🎵";
+        }
+      }
+
+      function nextSlide() {
+        if (currentSlide < slides.length - 1) {
+          goToSlide(currentSlide + 1);
+        }
+      }
+
+      function goToSlide(index) {
+        slides[currentSlide].classList.remove("active");
+        slides[currentSlide].classList.add("prev");
+        currentSlide = index;
+        slides[currentSlide].classList.remove("prev");
+        slides[currentSlide].classList.add("active");
+        slides.forEach((slide, i) => {
+          if (i < currentSlide) {
+            slide.classList.add("prev");
+          } else if (i > currentSlide) {
+            slide.classList.remove("prev");
+          }
+        });
+      }
+
+      function sayYes() {
+        const container = document.getElementById("confetti-container");
+        const emojis = ["🖤", "💀", "🎉", "✨", "⭐", "💫", "🌙"];
+        for (let i = 0; i < 40; i++) {
+          const confetti = document.createElement("div");
+          confetti.className = "confetti";
+          confetti.textContent =
+            emojis[Math.floor(Math.random() * emojis.length)];
+          confetti.style.left = Math.random() * 100 + "%";
+          confetti.style.animationDelay = Math.random() * 2 + "s";
+          confetti.style.animationDuration = Math.random() * 3 + 3 + "s";
+          container.appendChild(confetti);
+        }
+        goToSlide(6);
+      }
+
+      function tryAgain() {
+        alert("The answer is yes. You know it is. 😊🖤");
+      }
+
+      document.addEventListener("mousemove", (e) => {
+        if (Math.random() > 0.97) {
+          const sparkle = document.createElement("div");
+          sparkle.style.cssText = `position: fixed; left: ${e.clientX}px; top: ${e.clientY}px; width: 3px; height: 3px; background: #d4af37; border-radius: 50%; pointer-events: none; z-index: 9999; animation: sparkle 1s ease-out forwards;`;
+          document.body.appendChild(sparkle);
+          setTimeout(() => sparkle.remove(), 1000);
+        }
+      });
+
+      const style = document.createElement("style");
+      style.textContent = `@keyframes sparkle { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(0) translateY(-30px); } }`;
+      document.head.appendChild(style);
+
+      document.querySelectorAll(".cat-wrapper").forEach((cat) => {
+        cat.addEventListener("click", function (e) {
+          e.stopPropagation();
+          const messages = ["Purr~ 😻", "Meow! 💕", "*nuzzle* 🥰"];
+          const message = document.createElement("div");
+          message.textContent =
+            messages[Math.floor(Math.random() * messages.length)];
+          message.style.cssText = `position: fixed; left: 50%; top: 30%; transform: translate(-50%, -50%); font-size: 2.5rem; color: #ffb3ba; text-shadow: 0 0 20px rgba(255, 179, 186, 0.8); pointer-events: none; z-index: 10000; animation: fadeOut 1.5s forwards;`;
+          document.body.appendChild(message);
+          setTimeout(() => message.remove(), 1500);
+        });
+      });
+
+      const fadeStyle = document.createElement("style");
+      fadeStyle.textContent = `@keyframes fadeOut { 0% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -100%) scale(1.3); } }`;
+      document.head.appendChild(fadeStyle);
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight" || e.key === "Enter") nextSlide();
+      });
+    </script>
+  </body>
+</html>
